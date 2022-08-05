@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+
+
+
+    <div class="container justify-content-center">
+
+    <h2 class="mt-4 text-center" ></h2>
+
+
+    {% if not files %}
+        <h3 class="text-center mt-4" >There is no file uploaded</h3>
+    {% else %}
+        <div class="m-5"></div>
+        <h3 class="d-flex justify-content-center m-1">My Uploaded Files</h3>
+
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col" class="text-center col-md-7">File name</th>
+                            <th scope="col" class="col-md-3">Date added</th>
+                            <th scope="col" class="col-md-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file in files %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{file.file_name}}</td>
+                                <td>{{file.date_created}}</td>
+                                <td class="d-flex">
+                                    <a href="{{ file.url }}" download class="btn btn-dark float-right">Download</a>
+
+                                    <a href="{% url 'download' file.id %}" class="btn btn-success btn-sm m-1">Download</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+</div>
